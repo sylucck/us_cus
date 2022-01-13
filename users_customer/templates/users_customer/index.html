@@ -1,0 +1,12 @@
+<h2>Home page</h2>
+
+
+{% for product in totals %}
+<h4>{{ product.name }} | {{ product.description }} |{{ product.size }}| #{{ product.price }} </h4>
+<h4></h4>
+{% endfor %}
+
+<br>
+{% for d in tot_id %}
+<h4> {{ d }}</h4>
+{% endfor %}
