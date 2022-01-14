@@ -17,14 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 
 #user url configureation
-from users_customer import views as user_views
+from e_commerce import views as user_views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('e_commerce.urls')),
-    path('login/', auth_views.LoginView.as_view(template_name="users_customer/login.html"), name="login"),
-    path('logout/', auth_views.LogoutView.as_view(template_name="users_customer/logout.html"), name="logout"),
+    path('login/', auth_views.LoginView.as_view(template_name="e_commerce/login.html"), name="login"),
+    path('logout/', auth_views.LogoutView.as_view(template_name="e_commerce/logout.html"), name="logout"),
     path('register/', user_views.register, name="register"),
 
 ]
