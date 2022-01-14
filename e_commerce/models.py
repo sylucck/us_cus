@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Profile(models.Model):
+class Customer(models.Model):
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=30, null=True, blank=True, help_text="Insert your name")
     image = models.ImageField(default='default.png', upload_to='profile_pics')
@@ -14,7 +14,7 @@ class Profile(models.Model):
 
     @staticmethod
     def get_all_users():
-        return Profile.objects.all()
+        return Customer.objects.all()
 
     def __str__(self):
         """String for representing a model object"""
@@ -34,7 +34,7 @@ class Category(models.Model):
 
 
     class  Meta:  #new
-        verbose_name_plural  =  "Category" 
+        verbose_name_plural  =  "Categories" 
 
     def __str__(self):
         """String for representing a model object"""
@@ -63,7 +63,7 @@ class Product(models.Model):
         return Product.objects.all()
 
 class Order(models.Model):
-    customer = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True)
     complete = models.BooleanField(default=False, null=True, blank=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
     transaction_id = models.CharField(max_length=100, null=True)
@@ -80,7 +80,7 @@ class OrderItem(models.Model):
 
 
 class ShippingAddress(models.Model):
-	customer = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
+	customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
 	order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
 	address = models.CharField(max_length=200, null=False)
 	city = models.CharField(max_length=200, null=False)

@@ -1,7 +1,7 @@
-{% extends 'main.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
+{% block body %}
 
 <div class="row">
 	<div class="col-lg-6">
@@ -68,8 +68,8 @@
                 
             </div>
             {% endfor %}
-            <h5>Items:{{order.get_cart_items}}</h5>
-            <h5>Total:   ${{order.get_cart_total|floatformat:2}}</h5>
+            <h5>Items:</h5>
+            <h5>Total:   $</h5>
             
         </div>
         
@@ -78,4 +78,4 @@
 </div>
 
 
-{% endblock content %}
+{% endblock body %}

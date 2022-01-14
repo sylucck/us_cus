@@ -14,7 +14,7 @@ def register(request):
             raw_password = form.cleaned_data.get('password1')
             email = form.cleaned_data.get('email')
             user = authenticate(username=username, password=raw_password)
-            Profile.objects.create(user=user, name=username, email=email)
+            Customer.objects.create(user=user, name=username)
             #sending a success message
             messages.success(request, f'Hello {username}, your account has been created! You are able to log in')
             login(request, user)
@@ -22,7 +22,7 @@ def register(request):
 
     else:
         form = UserRegistrationForm()
-    return render(request, 'users_customer/register.html', {'form':form})
+    return render(request, 'e_commerce/register.html', {'form':form})
 
 def index(request):
     totals = Product.get_all_products()
@@ -36,7 +36,7 @@ def index(request):
         'categories': categories,
     }
 
-    return render(request, 'users_customer/index.html', context)
+    return render(request, 'e_commerce/index.html', context)
 
 
 #cart views creation
@@ -60,7 +60,7 @@ def cart(request):
         'items': items,
     }
 
-    return render(request, 'users_customer/cart.html', context)
+    return render(request, 'e_commerce/cart.html', context)
 
 
 def checkout(request):
@@ -68,5 +68,5 @@ def checkout(request):
     context = {
 
     }
-    return render(request, 'users_customer/checkout.html', context)
+    return render(request, 'e_commerce/checkout.html', context)
 
