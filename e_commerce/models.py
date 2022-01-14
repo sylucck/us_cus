@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 
 class Customer(models.Model):
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30, null=True, blank=True, help_text="Insert your name")
-    image = models.ImageField(default='default.png', upload_to='profile_pics')
+    name = models.CharField(max_length=40, null=True, blank=True, help_text="Insert your name")
+    image = models.ImageField(default='default.png', upload_to='profile_pics', null=True, blank=True)
     phone = models.CharField(max_length=11, null=True, blank=True)
     address = models.CharField(max_length=20, null=True, blank=True)
 
@@ -43,8 +43,8 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=150)
-    price = models.IntegerField(default=0)
-    image = models.ImageField(null=True, blank=True)
+    price = models.DecimalField(max_digits=7, decimal_places=2)
+    image = models.ImageField(upload_to='product_image', null=True, blank=True)
     digital = models.BooleanField(default=False,null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,default=1)
     description = models.CharField(max_length=250, default='', null=True, blank=True)
