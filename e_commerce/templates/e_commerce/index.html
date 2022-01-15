@@ -2,57 +2,75 @@
 {% load static %}			
 {% block body %}
 
-
-
-
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
         <div class="row">
-            {% for product in totals %}
-            <div class="col-lg-4">
-                <img class="thumbnail" src="#">
-                <div class="box-element product">
-                    <h6><strong>{{ product.name }}</strong></h6>
-                    <h6><strong>{{ product.description }} | {{ product.size }}</strong></h6>
-                    <hr>
-        
-                    <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+            <div class=" col-md-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h3 class=" site-heading my-4 mt-3 text-blue"> Welcome to my awesome Blog </h3>
                     
-                    <a class="btn btn-outline-success" href="#">View</a>
-                    <h4 style="display:inline-block;float:right"><strong>${{product.price|floatformat:2}}</strong></h4>
-        
                 </div>
             </div>
-            {% endfor %}
-
         </div>
-        <div class="container-fluid mt-3">
-            <div class="row">
-        
-        
+    </div>
+</header>
+<!-- body -->
+
+<div class="col-lg-3 float-left"> <br>
+    <div class="list-group">
+
+        <strong><a href="/" class="list-group-item list-group-item-action btn btn-outline-success">All Products</a></strong>
+
+        {% for category in categories %}
+        <a href="/?category={{category.id}}"
+            class="list-group-item list-group-item-action btn btn-outline-success ">{{category.name}}</a>
+        {% endfor %}
+    </div>
+
+</div>
+	
+
                 <!-- filter -->
-        
-                <div class="col-lg-3 mx-auto">
-                    <div class="list-group">
-        
-                        <a href="/" class="list-group-item list-group-item-action btn btn-outline-success">All Products</a>
-        
-                        {% for category in categories %}
-                        <a href="/?category={{category.id}}"
-                            class="list-group-item list-group-item-action btn btn-outline-success ">{{category.name}}</a>
-                        {% endfor %}
-                    </div>
-                </div>
+                
+                
+           
+<br>
+       
+
+
+
+    <!-- filter -->
+
+
+
+    
+    <div class="row">
+        {% for product in totals %} 
+        <div class="col-lg-6">
+            <img class="thumbnail" src="{{ product.image }}">
+            <div class="box-element product">
+                <h6><strong>{{ product.name }}</strong></h6>
+                <hr>
+
+                <button data-product="" data-action="" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                
+                <a class="btn btn-outline-success" href="#">View details</a>
+                <h5 style="display:inline-block;float:right"><strong>${{product.price| floatformat:2}}</strong></h5>
+
             </div>
         </div>
+        {% endfor %}
+        
+    </div>
+    </div>
+    
+
+    
+  
 
         
-
-
-
-   
-    <br>
-    {% for d in tot_id %}
-    <h4> {{ d }}</h4>
-    {% endfor %}
+    
 		
 
 {% endblock body %}
