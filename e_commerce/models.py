@@ -63,6 +63,12 @@ class Product(models.Model):
     def get_all_products():
         return Product.objects.all()
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+
+        return reverse("index_details", kwargs={"slug": str(self.slug)})
+
+
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True)
     complete = models.BooleanField(default=False, null=True, blank=True)

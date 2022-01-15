@@ -3,6 +3,7 @@ from .models import *
 from .forms import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.views import generic
 # Create your views here.
 
 def register(request):
@@ -39,14 +40,10 @@ def index(request):
 
     return render(request, 'e_commerce/index.html', context)
 
-def index_details(request, slug):
-    post = Product.objects.get(slug=slug)
 
-    context = {
-        'post': post,
-    }
-
-    return render(request, 'e_commerce/index_details.html', context)
+class ProductDetail(generic.DetailView):
+    model = Product
+    template_name = 'e_commerce/index_details.html'
 
 
 #cart views creation

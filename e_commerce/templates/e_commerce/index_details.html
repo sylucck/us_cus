@@ -7,16 +7,16 @@
         <!-- Blog Entries Column -->
         <div class="col-md-10 mt-5 center">
         <!--<div class="col-md-8 offset-md-2">-->
-           <h1>{% block title %} {{ posts.title }} {% endblock title %}</h1>
+           <h1>{% block title %} {{ object.name }} {% endblock title %}</h1>
             <small>
-                {{ posts.price }} |&nbsp;Categories:&nbsp;
-                {% for category in posts.categories.all %}
+                {{ object.price }} |&nbsp;Categories:&nbsp;
+                
                 <a href="#">
-                    {{ category.name }}</a>&nbsp;
-                {% endfor %}
+                    {{ object.description }}</a>&nbsp;
+                
             </small>
             <img class="thumbnail" src="#">
-            <p class="card-text ">{{ post.content | linebreaks }}</p>
+            <p class="card-text "></p>
             <hr>
 
 

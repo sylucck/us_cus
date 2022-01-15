@@ -47,7 +47,7 @@
     
     <div class="row">
         {% for product in totals %} 
-        <div class="col-lg-6">
+        <div class="col-lg-5">
             <img class="thumbnail" src="{{ product.image }}">
             <div class="box-element product">
                 <h6><strong>{{ product.name }}</strong></h6>
@@ -55,7 +55,7 @@
 
                 <button data-product="" data-action="" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
                 
-                <a class="btn btn-outline-success" href="{% url 'index_details' post.slug %}">View details</a>
+                <a class="btn btn-outline-success" href="{% url 'index_details' product.slug  %}">View</a>
                 <h5 style="display:inline-block;float:right"><strong>${{product.price| floatformat:2}}</strong></h5>
 
             </div>
@@ -63,7 +63,7 @@
         {% endfor %}
         
     </div>
-    </div>
+    
     
 
     
