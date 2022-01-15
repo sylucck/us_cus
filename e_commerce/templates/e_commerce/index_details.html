@@ -86,7 +86,7 @@ img {
   font-weight: bold; }
 
   .checked, .price span {
-  color: #352105; }
+  color: #0076ad; }
 
 .product-title, .rating, .product-description, .price, .vote, .sizes {
   margin-bottom: 15px; }
@@ -110,7 +110,7 @@ img {
     margin-left: 20px; }
 
 .add-to-cart, .like {
-  background: #1d1407;
+  background: #0a995e;
   padding: 1.2em 1.5em;
   border: none;
   text-transform: UPPERCASE;
@@ -185,7 +185,7 @@ img {
                                     </div>
                                 </div>
                                 <h5 class="product-description">{{ object.description }}</h5>
-                                <h4 class="price">current price: <span>#{{ object.price }}</span></h4>
+                                <h4 class="price">price: <span>NGN {{ object.price }}</span></h4>
                                 <h5 class="sizes">size: {{ object.size }}</h5>
                                 <h5 class="lead">Category: {{ object.category }}</h5>
                                 <div class="action">
@@ -199,23 +199,3 @@ img {
 
 
 {% endblock body %}
-<div class="main-area">
-    <div class="product-cards">
-        <div class="row featurette">
-            <div class="thumbnail col-lg-3 float-left">
-                <img src="/media/{ object.image }}" class="card-img-top" alt="...">
-            </div>
-            <div class="col-md-3 float-right">
-                <h1 class="featurette-heading"> {{ object.name }}</h1>
-                <p class="lead">NGN. {{ object.price }} </p>
-                <p class="lead"> {{ object.description }}</p>
-                <p class="lead"> {{ object.category }}</p>
-                <p class="lead"> {{ object.size }}</p>
-                <a class="btn btn-primary" href="#">Add To Cart</a>
-
-            </div>
-
-        </div>
-    </div>
-
-</div>
