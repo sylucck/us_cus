@@ -55,7 +55,7 @@
 
                 <button data-product="" data-action="" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
                 
-                <a class="btn btn-outline-success" href="#">View details</a>
+                <a class="btn btn-outline-success" href="{% url 'index_details' post.slug %}">View details</a>
                 <h5 style="display:inline-block;float:right"><strong>${{product.price| floatformat:2}}</strong></h5>
 
             </div>

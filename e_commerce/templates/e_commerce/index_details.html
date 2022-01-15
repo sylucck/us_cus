@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-10 mt-5 center">
+        <!--<div class="col-md-8 offset-md-2">-->
+           <h1>{% block title %} {{ posts.title }} {% endblock title %}</h1>
+            <small>
+                {{ posts.price }} |&nbsp;Categories:&nbsp;
+                {% for category in posts.categories.all %}
+                <a href="#">
+                    {{ category.name }}</a>&nbsp;
+                {% endfor %}
+            </small>
+            <img class="thumbnail" src="#">
+            <p class="card-text ">{{ post.content | linebreaks }}</p>
+            <hr>
+
+
+
+
+{% endblock body %}

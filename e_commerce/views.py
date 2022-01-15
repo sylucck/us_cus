@@ -14,6 +14,7 @@ def register(request):
             raw_password = form.cleaned_data.get('password1')
             email = form.cleaned_data.get('email')
             user = authenticate(username=username, password=raw_password)
+            #creating a customer with the user instances
             Customer.objects.create(user=user, name=username)
             #sending a success message
             messages.success(request, f'Hello {username}, your account has been created! You are able to log in')
@@ -37,6 +38,15 @@ def index(request):
     }
 
     return render(request, 'e_commerce/index.html', context)
+
+def index_details(request, slug):
+    post = Product.objects.get(slug=slug)
+
+    context = {
+        'post': post,
+    }
+
+    return render(request, 'e_commerce/index_details.html', context)
 
 
 #cart views creation
