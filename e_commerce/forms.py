@@ -23,4 +23,4 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Customer
-        fields = [ 'image', 'address',  ]
+        fields = [ 'name', 'image', 'address', 'phone' ]
