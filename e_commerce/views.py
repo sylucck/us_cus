@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login
 from django.views import generic
 from django.http import JsonResponse
 import json
+import datetime
 # Create your views here.
 
 def register(request):
@@ -37,7 +38,7 @@ def index(request):
     else:
         #if user is not authenticated, we live an empty value.
         items = []
-        order ={'get_cart_total':0, 'get_cart_items':0}
+        order ={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
         cartItems = order['get_cart_items']
 
     totals = Product.get_all_products()
@@ -76,7 +77,7 @@ def cart(request):
     else:
         #if user is not authenticated, we live an empty value.
         items = []
-        order ={'get_cart_total':0, 'get_cart_items':0}
+        order ={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
         cartItems = order['get_cart_items']
 
     context = {
@@ -97,11 +98,13 @@ def checkout(request):
     else:
         #if user is not authenticated, we live an empty value.
         items = []
-        order ={'get_cart_total':0, 'get_cart_items':0}
+        order ={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
+        cartItems = order['get_cart_items']
 
     context = {
         'items': items,
         'order': order,
+        'cartItems': cartItems,
     }
 
     return render(request, 'e_commerce/checkout.html', context)
@@ -152,4 +155,33 @@ def profile(request):
         'p_form': p_form
     }
     return render(request, 'e_commerce/profile.html', context)
+
+
+def processOrder(request):
+    transaction_id  = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        total = float(data['form']['total'])
+        order.transaction_id = transaction_id
+        #items = order.orderitem_set.all()
+        #cartItems = order.
+        if total == order.get_cart_total:
+            order.complete = True
+        order.save()
+
+        if order.shipping == True:
+            ShippingAddress.objects.create(
+                customer=customer,
+                order = order,
+                address = data['shipping']['address'],
+                city =data['shipping']['city'],
+                state = data['shipping']['state'],
+                zipcode=data['shippping']['zipcode']
+            )
+    else:
+        print("user is not logged in..")
+    return JsonResponse("Payment complete", safe=False)
 
