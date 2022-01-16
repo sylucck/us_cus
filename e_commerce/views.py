@@ -77,6 +77,7 @@ def checkout(request):
     }
     return render(request, 'e_commerce/checkout.html', context)
 
+
 def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
