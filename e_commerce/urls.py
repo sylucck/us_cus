@@ -9,6 +9,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('checkout/', views.checkout, name='checkout'),
     path('cart/', views.cart, name='cart'),
+    path('update_item/', views.updateItem, name='update_item'),
     path('profile/', user_views.profile, name="profile"),
     path('register/', user_views.register, name="register"),
     path('login/', auth_views.LoginView.as_view(template_name="e_commerce/login.html"), name="login"),
