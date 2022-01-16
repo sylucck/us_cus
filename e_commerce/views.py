@@ -53,7 +53,7 @@ def cart(request):
         #setting the customer value. Simply setting the customer to profile that has the user.
         customer = request.user.customer
         #creating an object or querying an object. Having setting the Order to the customer with complete status as false.
-        #customer = customer.save()
+
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         #we getting items attached to the order. we getting all order items that has the order.
         items = order.orderitem_set.all()
@@ -62,19 +62,31 @@ def cart(request):
     else:
         #if user is not authenticated, we live an empty value.
         items = []
+        order ={'get_cart_total':0, 'get_cart_items':0}
 
     context = {
         'items': items,
+        'order': order,
     }
 
     return render(request, 'e_commerce/cart.html', context)
 
 
 def checkout(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+    else:
+        #if user is not authenticated, we live an empty value.
+        items = []
+        order ={'get_cart_total':0, 'get_cart_items':0}
 
     context = {
-
+        'items': items,
+        'order': order,
     }
+
     return render(request, 'e_commerce/checkout.html', context)
 
 

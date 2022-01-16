@@ -68,8 +68,8 @@
                 
             </div>
             {% endfor %}
-            <h5>Items:</h5>
-            <h5>Total:   $</h5>
+            <h5>Items: {{ order.get_cart_items}}</h5>
+            <h5>Total:NGN {{ order.get_cart_total }}</h5>
             
         </div>
         

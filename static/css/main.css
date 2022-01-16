@@ -97,26 +97,3 @@ h1,h2,h3,h4,h5,h6{
 .hidden{
 	display: none!important;
 }
-
-.color {
-	display: inline-block;
-	vertical-align: middle;
-	margin-right: 10px;
-	height: 2em;
-	width: 2em;
-	border-radius: 2px; }
-	.color:first-of-type {
-	  margin-left: 20px; }
-  
-  .add-to-cart, .like {
-	background: #ff9f1a;
-	padding: 1.2em 1.5em;
-	border: none;
-	text-transform: UPPERCASE;
-	font-weight: bold;
-	color: #fff;
-	-webkit-transition: background .3s ease;
-			transition: background .3s ease; }
-	.add-to-cart:hover, .like:hover {
-	  background: #b36800;
-	  color: #fff; }
