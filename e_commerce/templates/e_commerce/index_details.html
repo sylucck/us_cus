@@ -189,7 +189,7 @@ img {
                                 <h5 class="sizes">size: {{ object.size }}</h5>
                                 <h5 class="lead">Category: {{ object.category }}</h5>
                                 <div class="action">
-                                    <button class="add-to-cart btn btn-default" type="button">add to cart</button>
+                                    <button data-product={{product.id}} data-action="add" class="add-to-cart btn btn-default update-cart" type="button">add to cart</button>
                                 </div>
                             </div>
                         </div>
