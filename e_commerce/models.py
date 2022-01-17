@@ -28,10 +28,16 @@ class Customer(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=40, verbose_name='name')
+    slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
 
     @staticmethod
     def get_all_categories():
         return Category.objects.all()
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+
+        return reverse("category_details", kwargs={"slug": str(self.slug)})
 
 
     class  Meta:  #new

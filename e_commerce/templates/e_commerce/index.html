@@ -43,18 +43,6 @@
 </style>
 
 <!-- body -->
-<div class="col-lg-3 float-left"> <br>
-    <div class="list-group">
-
-        <strong><a href="/" class="list-group-item list-group-item-action btn btn-outline-success">All Products</a></strong>
-
-        {% for category in categories %}
-        <a href="#"
-            class="list-group-item list-group-item-action btn btn-outline-success ">{{category.name}}</a>
-        {% endfor %}
-    </div>
-
-</div>
 
 
         
@@ -68,7 +56,7 @@
     
     <div class="row">
         {% for product in totals %} 
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <img class="thumbnail" src="{{ product.image.url }}">
             <div class="box-element product">
                 <h6><strong>{{ product.name }}</strong></h6>

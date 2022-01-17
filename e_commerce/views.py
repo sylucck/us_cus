@@ -60,6 +60,19 @@ class ProductDetail(generic.DetailView):
     model = Product
     template_name = 'e_commerce/index_details.html'
 
+def category(request):
+    cates = Category.get_all_categories
+
+    context = {
+        'cates': cates,
+    }
+    return render(request, 'e_commerce/category.html', context)
+
+class CategoryDetail(generic.DetailView):
+    model = Category
+    template_name = 'e_commerce/category_details.html'
+
+
 
 #cart views creation
 def cart(request):
@@ -179,7 +192,7 @@ def processOrder(request):
                 address = data['shipping']['address'],
                 city =data['shipping']['city'],
                 state = data['shipping']['state'],
-                zipcode=data['shippping']['zipcode']
+                zipcode =data['shipping']['zipcode'],
             )
     else:
         print("user is not logged in..")
