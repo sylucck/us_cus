@@ -55,21 +55,13 @@ def index(request):
     return render(request, 'e_commerce/index.html', context)
 
 
-class ProductDetail(generic.DetailView):
-    model = Product
-    template_name = 'e_commerce/index_details.html'
-
-    def dispatch(self, request, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            customer = request.user.customer
-            order, created = Order.objects.get_or_create(customer=customer, complete=False)
-            items = order.orderitem_set.all()
-            cartItems = order.get_cart_items
-        else:
-            cookieData = cookieCart(request)
-            cartItems = cookieData['cartItems']
-        return super().dispatch(request, *args, **kwargs)
-
+def product_details(request, slug):
+    post = Product.objects.get(slug=slug)
+   
+    context = {
+        'post': post,
+    }      
+    return render(request, 'e_commerce/product_details.html', context)
 
 def category(request):
     cates = Category.get_all_categories

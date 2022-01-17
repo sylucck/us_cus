@@ -18,7 +18,8 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name="e_commerce/logout.html"), name="logout"),
     #path('<category>/', views.CategoryDetail.as_view(), name='e_category'),
     path('category/<slug:slug>/', views.CategoryDetail.as_view(), name='category_details'),
-    path('<slug:slug>/', views.ProductDetail.as_view(), name='index_details'),#e_commerce details page
+    #path('<slug:slug>/', views.ProductDetail.as_view(), name='index_details'),#e_commerce details page
+    path('<slug:slug>/', views.product_details, name='product_details')
     
     
 ]
