@@ -7,6 +7,7 @@ from django.views import generic
 from django.http import JsonResponse
 import json
 import datetime
+from .utils import cookieCart
 # Create your views here.
 
 def register(request):
@@ -36,11 +37,10 @@ def index(request):
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
     else:
-        #if user is not authenticated, we live an empty value.
-        items = []
-        order ={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
-        cartItems = order['get_cart_items']
-
+       cookieData = cookieCart(request)
+       cartItems = cookieData['cartItems']
+      
+        
     totals = Product.get_all_products()
     
     categories = Category.get_all_categories()
@@ -48,7 +48,6 @@ def index(request):
     context = {
 
         'totals': totals,
-        
         'categories': categories,
         'cartItems': cartItems
     }
@@ -86,12 +85,13 @@ def cart(request):
         #we getting items attached to the order. we getting all order items that has the order.
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
-        
+
+          #if user is not authenticated, we live an empty value.
     else:
-        #if user is not authenticated, we live an empty value.
-        items = []
-        order ={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
-        cartItems = order['get_cart_items']
+        cookieData = cookieCart(request)
+        cartItems = cookieData['cartItems']
+        order = cookieData['order']
+        items = cookieData['items']
 
     context = {
         'items': items,
@@ -109,11 +109,11 @@ def checkout(request):
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
     else:
-        #if user is not authenticated, we live an empty value.
-        items = []
-        order ={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
-        cartItems = order['get_cart_items']
-
+        cookieData = cookieCart(request)
+        cartItems = cookieData['cartItems']
+        order = cookieData['order']
+        items = cookieData['items']
+        
     context = {
         'items': items,
         'order': order,
