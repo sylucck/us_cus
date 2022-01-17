@@ -43,3 +43,22 @@ def cookieCart(request):
             except:
                 pass
         return {'cartItems': cartItems, 'order':order, 'items': items}
+
+def cartData(request):
+    #if the user is authenticated
+    if request.user.is_authenticated:
+        #setting the customer value. Simply setting the customer to profile that has the user.
+        customer = request.user.customer
+        #creating an object or querying an object. Having setting the Order to the customer with complete status as false.
+
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        #we getting items attached to the order. we getting all order items that has the order.
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+
+    else:
+        cookieData = cookieCart(request)
+        cartItems = cookieData['cartItems']
+        order = cookieData['order']
+        items = cookieData['items']
+    return {'cartItems': cartItems, 'order':order, 'items': items}

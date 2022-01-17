@@ -7,9 +7,10 @@ from django.views import generic
 from django.http import JsonResponse
 import json
 import datetime
-from .utils import cookieCart
+from .utils import cookieCart, cartData
 # Create your views here.
 
+#user registration page
 def register(request):
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
@@ -30,17 +31,33 @@ def register(request):
         form = UserRegistrationForm()
     return render(request, 'e_commerce/register.html', {'form':form})
 
-def index(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
+#user profile page
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, 
+                                   request.FILES,
+                                   instance=request.user.customer)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request,f' Your account has been Updated')
+            return redirect('profile')
     else:
-       cookieData = cookieCart(request)
-       cartItems = cookieData['cartItems']
-      
-        
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.customer)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'e_commerce/profile.html', context)
+
+#store page
+def store(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
+    
     totals = Product.get_all_products()
     
     categories = Category.get_all_categories()
@@ -52,50 +69,34 @@ def index(request):
         'cartItems': cartItems
     }
 
-    return render(request, 'e_commerce/index.html', context)
+    return render(request, 'e_commerce/store.html', context)
 
-
+#store details page
 def product_details(request, slug):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+       cookieData = cookieCart(request)
+       cartItems = cookieData['cartItems']
+
     post = Product.objects.get(slug=slug)
    
     context = {
         'post': post,
+        'cartItems': cartItems,
     }      
     return render(request, 'e_commerce/product_details.html', context)
 
-def category(request):
-    cates = Category.get_all_categories
 
-    context = {
-        'cates': cates,
-    }
-    return render(request, 'e_commerce/category.html', context)
-
-class CategoryDetail(generic.DetailView):
-    model = Category
-    template_name = 'e_commerce/category_details.html'
-
-
-
-#cart views creation
+#cart page
 def cart(request):
-    #if the user is authenticated
-    if request.user.is_authenticated:
-        #setting the customer value. Simply setting the customer to profile that has the user.
-        customer = request.user.customer
-        #creating an object or querying an object. Having setting the Order to the customer with complete status as false.
-
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        #we getting items attached to the order. we getting all order items that has the order.
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-
-          #if user is not authenticated, we live an empty value.
-    else:
-        cookieData = cookieCart(request)
-        cartItems = cookieData['cartItems']
-        order = cookieData['order']
-        items = cookieData['items']
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
 
     context = {
         'items': items,
@@ -105,18 +106,12 @@ def cart(request):
 
     return render(request, 'e_commerce/cart.html', context)
 
-
+#checkout page
 def checkout(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
-        cookieData = cookieCart(request)
-        cartItems = cookieData['cartItems']
-        order = cookieData['order']
-        items = cookieData['items']
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
         
     context = {
         'items': items,
@@ -152,26 +147,6 @@ def updateItem(request):
     return JsonResponse('Item was added', safe=False)
 
 
-def profile(request):
-    if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, 
-                                   request.FILES,
-                                   instance=request.user.customer)
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request,f' Your account has been Updated')
-            return redirect('profile')
-    else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.customer)
-
-    context = {
-        'u_form': u_form,
-        'p_form': p_form
-    }
-    return render(request, 'e_commerce/profile.html', context)
 
 
 def processOrder(request):
