@@ -7,7 +7,7 @@ from django.views import generic
 from django.http import JsonResponse
 import json
 import datetime
-from .utils import cookieCart, cartData
+from .utils import cookieCart, cartData, guestOrder
 from django.shortcuts import get_object_or_404
 # Create your views here.
 
@@ -152,15 +152,21 @@ def processOrder(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        total = float(data['form']['total'])
-        order.transaction_id = transaction_id
-        #items = order.orderitem_set.all()
-        #cartItems = order.
-        if total == order.get_cart_total:
-            order.complete = True
-        order.save()
+        
 
-        if order.shipping == True:
+       
+    else:
+       customer, order = guestOrder(request, data)
+
+            
+    total = float(data['form']['total'])
+    order.transaction_id = transaction_id
+
+    if total == order.get_cart_total:
+            order.complete = True
+    order.save()
+    
+    if order.shipping == True:
             ShippingAddress.objects.create(
                 customer=customer,
                 order = order,
@@ -169,7 +175,6 @@ def processOrder(request):
                 state = data['shipping']['state'],
                 zipcode =data['shipping']['zipcode'],
             )
-    else:
-        print("user is not logged in..")
+
     return JsonResponse("Payment complete", safe=False)
 

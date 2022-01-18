@@ -78,7 +78,7 @@
 </div>
 <script type="text/javascript">
     var shipping = '{{order.shipping}}'
-    var total = '{{ order.get_cart_total|floatformat:2}}'
+    var total = '{{ order.get_cart_total }}'
 
 
     if(shipping == 'False'){
@@ -159,8 +159,8 @@
 				console.log('Success:', data);
 				alert('Transaction completed');  
 
-				//cart = {}//
-				//document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"//
+				cart = {}
+				document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
 
 				window.location.href = "{% url 'store' %}"
 
