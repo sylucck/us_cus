@@ -2,7 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+from django.utils.text import slugify
+import string
+import random
 
+#generating unique slugs
+def rand_slug():
+    return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
 
 # Create your models here.
 
@@ -81,10 +87,11 @@ class Product(models.Model):
     def get_all_products():
         return Product.objects.all()
 
-    def get_absolute_url(self):
-        from django.urls import reverse
-
-        return reverse("index_details", kwargs={"slug": str(self.slug)})
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(rand_slug() + "-" + self.name)
+        super(Product, self).save(*args, **kwargs)
     
     
 class Order(models.Model):
