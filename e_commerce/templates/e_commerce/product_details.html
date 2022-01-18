@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
-
-
+{% load static %}
 {% block body %}
 <style>
 body {
@@ -188,9 +187,9 @@ img {
                                 <h4 class="price">price: <span>NGN {{ post.price }}</span></h4>
                                 <h5 class="sizes">size: {{ post.size }}</h5>
                                 <h5 class="lead">Category: {{ post.category }}</h5>
-                                <div class="action">
-                                    <button data-product={{product.id}} data-action="add" class="add-to-cart btn btn-default update-cart" type="button">add to cart</button>
-                                </div>
+                                <hr>
+                                  <button data-product={{product.id}}  data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                                
                             </div>
                         </div>
                     </div>
