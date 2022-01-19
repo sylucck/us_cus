@@ -34,6 +34,8 @@ def register(request):
 
 #user profile page
 def profile(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, 
@@ -50,7 +52,8 @@ def profile(request):
 
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'cartItems': cartItems,
     }
     return render(request, 'e_commerce/profile.html', context)
 
@@ -77,7 +80,6 @@ def product_details(request, slug):
     data = cartData(request)
     cartItems = data['cartItems']
 
-    #post = Product.objects.get(slug=slug)
     post = get_object_or_404(Product, slug=slug)
    
     context = {
@@ -135,8 +137,6 @@ def updateItem(request):
         orderItem.quantity = (orderItem.quantity + 1)
     elif action == 'remove':
         orderItem.quantity = (orderItem.quantity - 1)
-
-
     orderItem.save()
     if orderItem.quantity <= 0:
         orderItem.delete()
@@ -156,18 +156,20 @@ def processOrder(request):
 
        
     else:
+
        customer, order = guestOrder(request, data)
+        
 
             
     total = float(data['form']['total'])
     order.transaction_id = transaction_id
 
-    if total == order.get_cart_total:
-            order.complete = True
+    if total == float(order.get_cart_total):
+        order.complete = True
     order.save()
-    
+
     if order.shipping == True:
-            ShippingAddress.objects.create(
+        ShippingAddress.objects.create(
                 customer=customer,
                 order = order,
                 address = data['shipping']['address'],
@@ -175,6 +177,11 @@ def processOrder(request):
                 state = data['shipping']['state'],
                 zipcode =data['shipping']['zipcode'],
             )
+        
+
+    
+    
+    
 
     return JsonResponse("Payment complete", safe=False)
 
