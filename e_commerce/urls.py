@@ -15,6 +15,7 @@ urlpatterns = [
     path('register/', user_views.register, name="register"),
     path('login/', auth_views.LoginView.as_view(template_name="e_commerce/login.html"), name="login"),
     path('logout/', auth_views.LogoutView.as_view(template_name="e_commerce/logout.html"), name="logout"),
+    #path("<int:id>/", views.product_details, name="product_details"),
     path('<slug:slug>/', views.product_details, name='product_details'),#e_commerce details page
     
     
