@@ -74,29 +74,49 @@
           <a class="nav-link" href="{% url 'store' %}">Ecommerce<span class="sr-only">(current)</span><img src="{% static 'media/shopping-cart-.png' %}" style="width:50px;height:50px,color:text-light;"></a></a>
         </li>
       </ul>
-      <div class="form-inline my-2 my-lg-0">
+    
+     
+
+    <div class="form-inline my-2 my-lg-0">
+    <ul class=" navbar-nav my-2 my-lg-0">
+
+     
+
       {% if user.is_authenticated %}
+
       
-      <a href="{% url 'profile' %}"class="btn btn-warning">Profile</a> 
-
-      <a href="{% url 'logout' %}"class="btn btn-warning">Logout</a> 
-
-
+      <li class="nav-item active ">
+        <a href="{% url 'profile' %}" class="btn btn-warning">Profile<span class="sr-only">(current)</span></a> 
+      </li>
+      <br>
+      <li class="nav-item active ">
+        <a  href="{% url 'logout' %}" class="btn btn-warning">Logout<span class="sr-only">(current)</span></a>
+      </li>
+      
       {% else %}
 
-      <a href="{% url 'login' %}"class="btn btn-warning">Login</a> 
+      <li class="nav-item active">
+        <a  href="{% url 'login' %}" class="btn btn-warning">Login<span class="sr-only">(current)</span></a>
+      </li>
       <br>
-      <a href="{% url 'register' %}"class="btn btn-warning">Register</a> 
+      <li class="nav-item active">
+        <a href="{% url 'register' %}" class="btn btn-warning">Register<span class="sr-only">(current)</span></a>
+      </li>
 
+      {% endif %}
 
-       {% endif %}
-         
-          <br>
-          <a href="{% url 'cart' %}"><img id="cart-icon" src="{% static 'media/cart.png' %}"></a>
-          <p id="cart-total">{{cartItems}}</p>
-      </div>
-    </div>
+      
         
+        <a href="{% url 'cart' %}"><img id="cart-icon" src="{% static 'media/cart.png' %}"></a>
+        <h5><p id="cart-total">{{cartItems}}</p></h5>
+         
+      
+      
+
+    </ul>
+    </div>
+    </div>
+
       
 </nav>
 
