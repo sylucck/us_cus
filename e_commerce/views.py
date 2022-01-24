@@ -102,6 +102,7 @@ class CategoryListView(generic.ListView):
         context['category_list'] = Category.objects.all()
         return context
 
+#category details page
 def category_details(request, slug):
     data = cartData(request)
     cartItems = data['cartItems']
@@ -114,10 +115,6 @@ def category_details(request, slug):
     }      
     return render(request, 'e_commerce/category_details.html', context)
 
-#class CategoryDetailView(generic.DetailView):
- #   model = Category
-  #  template_name = 'e_commerce/category_details.html'
-    #paginate_by = 2
 
 
 
