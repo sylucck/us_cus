@@ -12,6 +12,8 @@ from django.shortcuts import get_object_or_404
 # Create your views here.
 
 #user registration page
+
+
 def register(request):
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)

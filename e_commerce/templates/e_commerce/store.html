@@ -2,75 +2,64 @@
 {% load static %}
 {% block body %}
 
-<style>
-.preview-thumbnail.nav-tabs {
-  border: none;
-  margin-top: 15px; }
-  .preview-thumbnail.nav-tabs li {
-    width: 18%;
-    margin-right: 2.5%; }
-    .preview-thumbnail.nav-tabs li img {
-      max-width: 100%;
-      display: block; }
-    .preview-thumbnail.nav-tabs li a {
-      padding: 0;
-      margin: 0; }
-    .preview-thumbnail.nav-tabs li:last-of-type {
-      margin-right: 0; }
 
-.tab-content {
-  overflow: hidden; }
-  .tab-content img {
-    width: 100%;
-    -webkit-animation-name: opacity;
-            animation-name: opacity;
-    -webkit-animation-duration: .3s;
-            animation-duration: .3s; }
+		<!-- filter -->
 
-    .card {
-  margin-top: 50px;
-  background: #eee;
-  padding: 3em;
-  line-height: 1.5em; }
+		<div class="col-lg-3 mt-4 mx-auto float-right">
+			<div class="list-group">
 
-@media screen and (min-width: 997px) {
-  .wrapper {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex; } }
+				<a href="/" class="list-group-item list-group-item-action btn btn-outline-success">All Products</a>
 
-</style>
+				{% for category in categories %}
+				<a href="/?category={{category.id}}"
+					class="list-group-item list-group-item-action btn btn-outline-success ">{{category.name}}</a>
+				{% endfor %}
+			</div>
+		</div>
+    <br>
 
-<!-- body -->
+	
 
-
-        
-                
-                
-           
+     
 
 
 
 
-    
+
+
+
+   
     <div class="row">
-        {% for product in totals %} 
-        <div class="col-lg-4">
-            <img class="thumbnail" src="{{ product.image.url }}">
-            <div class="box-element product">
-                <h6><strong>{{ product.name }}</strong></h6>
-                <hr>
+    
+      {% for product in totals %} 
+      <div class="col-lg-4">
+       
+          <img class="thumbnail" src="{{ product.image.url }}">
+          <div class="box-element product">
+           
+              <h6 class="text-align"><strong>{{ product.name }}</strong></h6>
+              
+              <h5 style="display:inline-block;float:right"><strong>N {{product.price|floatformat:2}}</strong></h5>
 
-                <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
-                
-                <a class="btn btn-outline-success" href="{% url 'product_details' product.slug %}">View</a>
-                <h5 style="display:inline-block;float:right"><strong>N {{product.price|floatformat:2}}</strong></h5>
+              <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+              
+              <a class="btn btn-outline-success" href="{% url 'product_details' product.slug %}">View</a>
+             
 
-            </div>
-        </div>
-        {% endfor %}		
+          </div>
+        
+      </div>
+      {% endfor %}		
+  </div>
+  
+      
     </div>
+   </div>
+  
+
+
+   
+    
     
     
     
@@ -78,7 +67,7 @@
 
 
 {% endblock body %}
-
+<div class="col-lg-4"></div>
 
 
 
