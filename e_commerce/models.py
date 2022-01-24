@@ -87,7 +87,7 @@ class Product(models.Model):
 
     @staticmethod
     def get_all_products():
-        return Product.objects.all()
+        return Product.objects.all().order_by('-name')
 
     
     def save(self, *args, **kwargs):

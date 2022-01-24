@@ -34,7 +34,7 @@
       {% for product in users %} 
       <div class="col-lg-4">
        
-          <img class="thumbnail" src="{{ product.image.url }}">
+          <img class="thumbnail" src="{{ product.imageURL }}">
           <div class="box-element product">
            
               <h6 class="text-align"><strong>{{ product.name }}</strong></h6>
@@ -68,9 +68,9 @@
       {% endif %}
     {% endfor %}
     {% if users.has_next %}
-      <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+      <li><a href="?page={{ users.next_page_number }}">&raquo;Next page</a></li>
     {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
+      <li class="disabled"><span>Previous&raquo;</span></li>
     {% endif %}
   </ul>
 {% endif %}		
