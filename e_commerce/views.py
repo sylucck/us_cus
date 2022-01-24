@@ -90,6 +90,36 @@ def product_details(request, slug):
     }      
     return render(request, 'e_commerce/product_details.html', context)
 
+class CategoryListView(generic.ListView):
+    model = Category
+    template_name = 'e_commerce/category.html'
+    #paginate_by = 10
+
+    def get_context_data(self,**Kwargs):
+        #call the base implementation first to get the context
+        context = super(CategoryListView, self).get_context_data(**Kwargs)
+        #Create any data and add it to the context
+        context['category_list'] = Category.objects.all()
+        return context
+
+def category_details(request, slug):
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    cate = get_object_or_404(Category, slug=slug)
+   
+    context = {
+        'cate': cate,
+        'cartItems': cartItems,
+    }      
+    return render(request, 'e_commerce/category_details.html', context)
+
+#class CategoryDetailView(generic.DetailView):
+ #   model = Category
+  #  template_name = 'e_commerce/category_details.html'
+    #paginate_by = 2
+
+
 
 #cart page
 def cart(request):
