@@ -63,6 +63,8 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
     <a class="navbar-brand" href="#">Home</a>
+    <a class="navbar-brand" href="{% url 'store' %}">Ecommerce<span class="sr-only">(current)</span><img src="{% static 'media/shopping-cart-.png' %}" style="width:50px;height:50px,color:text-light;"></a>
+    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -71,14 +73,14 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
       
-          <a class="nav-link" href="{% url 'store' %}">Ecommerce<span class="sr-only">(current)</span><img src="{% static 'media/shopping-cart-.png' %}" style="width:50px;height:50px,color:text-light;"></a></a>
+          
         </li>
       </ul>
     
      
 
     <div class="form-inline my-2 my-lg-0">
-    <ul class=" navbar-nav my-2 my-lg-0">
+    <ul class="navbar-nav my-2 my-lg-0">
 
      
 
@@ -89,6 +91,7 @@
         <a href="{% url 'profile' %}" class="btn btn-warning">Profile<span class="sr-only">(current)</span></a> 
       </li>
       <br>
+      <hr>
       <li class="nav-item active ">
         <a  href="{% url 'logout' %}" class="btn btn-warning">Logout<span class="sr-only">(current)</span></a>
       </li>
@@ -133,6 +136,9 @@
           {% block body %}
 
           {% endblock body %}
+         
+             
+  </div>
       
 
         

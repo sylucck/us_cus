@@ -5,7 +5,7 @@
 
 		<!-- filter -->
 
-		<div class="col-lg-3 mt-4 mx-auto float-right">
+		<div class="col-lg-3 mt-4 mx-auto float-left">
 			<div class="list-group">
 
 				<a href="/" class="list-group-item list-group-item-action btn btn-outline-success">All Products</a>
@@ -31,7 +31,7 @@
    
     <div class="row">
     
-      {% for product in totals %} 
+      {% for product in users %} 
       <div class="col-lg-4">
        
           <img class="thumbnail" src="{{ product.image.url }}">
@@ -49,12 +49,34 @@
           </div>
         
       </div>
-      {% endfor %}		
+      {% endfor %}
+     
   </div>
-  
-      
-    </div>
+  <div class="col-lg-3 mt-4 mx-auto float-right">
+  {% if users.has_other_pages %}
+  <ul class="pagination">
+    {% if users.has_previous %}
+      <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in users.paginator.page_range %}
+      {% if users.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if users.has_next %}
+      <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}		
+</div>
    </div>
+   
   
 
 

@@ -186,7 +186,7 @@ img {
                                 <h5 class="product-description">{{post.description }}</h5>
                                 <h4 class="price">price: <span>N {{ post.price }}</span></h4>
                                 <h5 class="sizes">size: {{ post.size }}</h5>
-                                <h5 class="lead">Category: {{ post.category }}</h5>
+                                <h5 class="lead"><a href="{% url 'category-details' post.category.slug %}">Category: {{ post.category }}</a></h5>
                                 <hr>
                         
                                 

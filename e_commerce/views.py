@@ -9,6 +9,7 @@ import json
 import datetime
 from .utils import cookieCart, cartData, guestOrder
 from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
 #user registration page
@@ -65,12 +66,22 @@ def store(request):
     cartItems = data['cartItems']
     
     totals = Product.get_all_products()
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(totals, 9)
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
     
     categories = Category.get_all_categories()
    
     context = {
-
-        'totals': totals,
+        'users': users,
+       
         'categories': categories,
         'cartItems': cartItems
     }
@@ -90,6 +101,7 @@ def product_details(request, slug):
     }      
     return render(request, 'e_commerce/product_details.html', context)
 
+#category page
 class CategoryListView(generic.ListView):
     model = Category
     template_name = 'e_commerce/category.html'

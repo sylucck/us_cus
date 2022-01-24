@@ -163,13 +163,16 @@ body {
              
   
   </style>
-  
+  <br>
   <div class="container">
-    <h3>{{ cate.name }}</h3>
+   
+    {% block title %} <h1>{{ cate.name }}</h1>{% endblock %}
     <div class="row">
+        
         {% if cate.product_set.all %}
         {% for cates in cate.product_set.all %}
         <div class="container-fliud mt-4">
+            
             <div class="wrapper row mt-4">
                 <div class="preview col-md-4">
                     <div class="preview-pic tab-content">
@@ -201,6 +204,7 @@ body {
         <p>Not woorking </p>
         {% endif %}
     </div>
+    
   </div>
 
 
