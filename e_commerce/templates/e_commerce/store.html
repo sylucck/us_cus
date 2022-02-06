@@ -52,30 +52,35 @@
       {% endfor %}
      
   </div>
-  <div class="col-lg-3 mt-4 mx-auto float-right">
-  {% if users.has_other_pages %}
-  <ul class="pagination">
-    {% if users.has_previous %}
-      <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-    {% endif %}
-    {% for i in users.paginator.page_range %}
-      {% if users.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li><a href="?page={{ i }}">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if users.has_next %}
-      <li><a href="?page={{ users.next_page_number }}">&raquo;Next page</a></li>
-    {% else %}
-      <li class="disabled"><span>Previous&raquo;</span></li>
-    {% endif %}
-  </ul>
-{% endif %}		
+  
 </div>
-   </div>
+</div>
+<footer class="container py-5 bg-light col-lg-8">
+  <div class="col-lg-4 mt-10 mx-auto float-right">
+    {% if users.has_other_pages %}
+    <ul class="pagination">
+      {% if users.has_previous %}
+        <li><h4><a href="?page={{ users.previous_page_number }}">Previous page&laquo;</a></h4></li>
+      {% else %}
+        <li class="disabled"><h4><span>&laquo;</span></h4></li>
+      {% endif %}
+      {% for i in users.paginator.page_range %}
+        {% if users.number == i %}
+          <li class="active"><h4><span>{{ i }} <span class="sr-only">(current)</span></span></h4></li>
+        {% else %}
+          <li><h4><a href="?page={{ i }}">{{ i }}</a></h4></li>
+        {% endif %}
+      {% endfor %}
+      {% if users.has_next %}
+        <li><h4><a href="?page={{ users.next_page_number }}">&raquo;Next page</a></h4></li>
+      {% else %}
+        <li class="disabled"><h4><span>&raquo;</span></h4></li>
+      {% endif %}
+    </ul>
+  {% endif %}		
+  </div>
+ </footer>
+ <br>  
    
   
 
@@ -89,7 +94,7 @@
 
 
 {% endblock body %}
-<div class="col-lg-4"></div>
+
 
 
 
