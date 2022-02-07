@@ -104,6 +104,14 @@ h1,h2,h3,h4,h5,h6{
 .hidden{
 	display: none!important;
 }
+.masthead {
+	background: #acc3d3;
+	height: auto;
+	padding-bottom: 15px;
+	box-shadow: 0 16px 48px #E3E7EB;
+	padding-top: 10px;
+	
+}
 
 
 /*footer*/
@@ -112,8 +120,8 @@ footer { width:100%; background-color:#096f7a; min-height:250px; padding:10px 0p
 .pt2 { padding-top:40px ; margin-bottom:20px ;}
 footer p { font-size:13px; color:#CCC; padding-bottom:0px; margin-bottom:8px;}
 .mb10 { padding-bottom:15px ;}
-.footer_ul_amrc { margin:0px ; list-style-type:none ; font-size:14px; padding:0px 0px 10px 0px ; }
-.footer_ul_amrc li {padding:0px 0px 5px 0px;}
+.footer_ul_amrc { margin:0px ; color:#CCC; list-style-type:none ; font-size:14px; padding:0px 0px 10px 0px ; }
+.footer_ul_amrc li {padding:0px 0px 5px 0px; color:#CCC;}
 .footer_ul_amrc li a{ color:#CCC;}
 .footer_ul_amrc li a:hover{ color:#fff; text-decoration:none;}
 .fleft { float:left;}

@@ -69,8 +69,14 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-    <a class="navbar-brand" href="#">Home</a>
-    <a class="navbar-brand" href="{% url 'store' %}">Ecommerce<span class="sr-only">(current)</span><img src="{% static 'media/shopping-cart-.png' %}" style="width:50px;height:50px,color:text-light;"></a>
+    
+    <a class="navbar-brand" href="{% url 'store' %}">Ecommerce<span class="sr-only">(current)</span></a>
+
+    <br>
+    <form action="{% url 'search' %}" method="GET" value="{{request.GET.q}}">
+      Search <br><input type="text" name="q" value="{{request.GET.q}}" placeholder="Search products"/>
+      <input type="submit" name="submit" value="Search"/>
+      </form>
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -89,7 +95,11 @@
     <div class="form-inline my-2 my-lg-0">
     <ul class="navbar-nav my-2 my-lg-0">
 
-     
+      
+      
+        
+         <br>
+        <hr>
 
       {% if user.is_authenticated %}
 
@@ -127,7 +137,7 @@
     </div>
     </div>
 
-      
+ 
 </nav>
 
 
@@ -179,14 +189,17 @@
     
     
     <div class=" col-sm-4 col-md  col-6 col">
-    <h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
+    <h5 class="headin5_amrc col_white_amrc pt2">Disclaimer</h5>
     <!--headin5_amrc-->
     
     
     <ul class="footer_ul_amrc">
-    <li><a href="#">Bonus</a></li>
-    <li><a href="#">Bonus</a></li>
-    <li><a href="">Bonus</a></li>
+    <li>All items and prices are deliberately faked</li>
+    <li>Pictures were randomly picked over from the internet.</li>
+    <li>No item here is for sale.</li>
+    <li>It is strictly a web development project.</li>
+    <li>Take your time and enjoy all the funtionalities developed by me.</li>
+    <li>Read more on 'About' page below...</li>
     
     </ul>
     

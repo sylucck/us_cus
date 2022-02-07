@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block body %}
+<h1>Search Page</h1>
+
+<br/>
+<form action="{% url 'search' %}" method="GET" value="{{request.GET.q}}">
+Search <input type="text" name="q" value="{{request.GET.q}}" placeholder="Search posts"/>
+<input type="submit" name="submit" value="Search"/>
+</form>
+
+
+
+
+<div class="container">
+    <div class="row mx-auto">
+
+        <div class="col-md-8">
+            
+            {% if submitbutton == 'Search' and request.GET.q != '' %}
+            {% if results %}
+            <h1>Results for <b>{{ request.GET.q }}</b></h1>
+            <br><br/>
+            {% for result in results %}
+
+            <h1 class="title">{{ result.name }}</h1>
+            
+           
+            <hr>
+            <article>
+                
+                
+
+            </h2>
+            <img class="tab-pane active" src="{{ result.imageURL }}" style="width:300px;height:300px,color:text-light">
+                
+            <p class="card-text">NGN{{ result.price }}...</p><a href="" class="btn btn-primary">Read More</a>
+            </article>
+            {% endfor %}
+            {% else %}
+
+            <h4>No result for this search</h4>
+            
+            {% endif %}
+            {% endif %}
+            <hr>
+            
+            
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

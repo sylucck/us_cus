@@ -10,6 +10,8 @@ import datetime
 from .utils import cookieCart, cartData, guestOrder
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.urls import reverse_lazy
+from django.db.models import Q
 # Create your views here.
 
 #user registration page
@@ -226,3 +228,25 @@ def processOrder(request):
 
     return JsonResponse("Payment complete", safe=False)
 
+
+def searchposts(request):
+    if request.method == 'GET':
+        query= request.GET.get('q')
+
+        submitbutton= request.GET.get('submit')
+
+        if query is not None:
+            search= Q(name__icontains=query) | Q(price__icontains=query)
+
+            results= Product.objects.filter(search).distinct()
+
+            context={'results': results,
+                     'submitbutton': submitbutton}
+
+            return render(request, 'search.html', context)
+
+        else:
+            return render(request, 'search.html')
+
+    else:
+        return render(request, 'search.html')
