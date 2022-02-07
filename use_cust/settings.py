@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'e_commerce',
     'crispy_forms',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [

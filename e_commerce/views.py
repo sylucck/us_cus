@@ -49,7 +49,8 @@ def profile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request,f' Your account has been Updated')
+            name = p_form.cleaned_data.get('name')
+            messages.success(request,f' Hello {name}, Your account has been Updated')
             return redirect('profile')
     else:
         u_form = UserUpdateForm(instance=request.user)

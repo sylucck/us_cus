@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 
 from django.utils.text import slugify
@@ -61,7 +62,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
     image = models.ImageField(upload_to='product_image', null=True, blank=True)
-    digital = models.BooleanField(default=False,null=True, blank=True)
+    digital = models.BooleanField(default=False, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,default=1)
     description = models.CharField(max_length=250, default='', null=True, blank=True)
     size = models.CharField(max_length=200, null=True, blank=True, help_text='Input size of product')
@@ -83,11 +84,11 @@ class Product(models.Model):
 
 
     class Meta:
-        ordering = ['-name']
+        ordering = ['name']
 
     @staticmethod
     def get_all_products():
-        return Product.objects.all().order_by('-name')
+        return Product.objects.all().order_by('name')
 
     
     def save(self, *args, **kwargs):
@@ -160,5 +161,6 @@ class ShippingAddress(models.Model):
 
 
 
-
+class About(models.Model):
+    text = RichTextField(null=True, blank=True)
 

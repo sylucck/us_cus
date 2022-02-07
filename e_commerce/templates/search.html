@@ -33,7 +33,7 @@ Search <input type="text" name="q" value="{{request.GET.q}}" placeholder="Search
             </h2>
             <img class="tab-pane active" src="{{ result.imageURL }}" style="width:300px;height:300px,color:text-light">
                 
-            <p class="card-text">NGN{{ result.price }}...</p><a href="" class="btn btn-primary">Read More</a>
+            <p class="card-text">NGN{{ result.price }}...</p><a href="{% url 'product_details' result.slug %}" class="btn btn-outline-success">View</a>
             </article>
             {% endfor %}
             {% else %}
@@ -43,6 +43,7 @@ Search <input type="text" name="q" value="{{request.GET.q}}" placeholder="Search
             {% endif %}
             {% endif %}
             <hr>
+            <br>
             
             
             

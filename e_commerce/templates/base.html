@@ -74,7 +74,7 @@
 
     <br>
     <form action="{% url 'search' %}" method="GET" value="{{request.GET.q}}">
-      Search <br><input type="text" name="q" value="{{request.GET.q}}" placeholder="Search products"/>
+       <br><input type="text" name="q" value="{{request.GET.q}}" placeholder="Search products"/>
       <input type="submit" name="submit" value="Search"/>
       </form>
     
@@ -93,7 +93,7 @@
      
 
     <div class="form-inline my-2 my-lg-0">
-    <ul class="navbar-nav my-2 my-lg-0">
+   
 
       
       
@@ -108,7 +108,7 @@
         <a href="{% url 'profile' %}" class="btn btn-warning">Profile<span class="sr-only">(current)</span></a> 
       </li>
       <br>
-      <hr>
+      
       <li class="nav-item active ">
         <a  href="{% url 'logout' %}" class="btn btn-warning">Logout<span class="sr-only">(current)</span></a>
       </li>
@@ -176,7 +176,7 @@
     <div class="row"> 
     <div class=" col-sm-4 col-md col-sm-4  col-10 col">
    
-    <h5 class="headin5_amrc col_white_amrc pt2">Text Me</h5>
+    <h5 class="headin5_amrc col_white_amrc pt2">Call, Email or Find Me</h5>
     <!--headin5_amrc-->
    
     <p><i class="fa fa-phone"></i>  +234- 8108836102 </p>
