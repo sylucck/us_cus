@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,8 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+u5y-d^&%dy332hy4v*pv^8-x^$bd17d5fvp2l^9i^mjjc#jxf'
 
+env = environ.Env()
+environ.Env.read_env()
+SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -40,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'e_commerce',
     'crispy_forms',
-    'ckeditor',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -109,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE =  'Africa/Lagos'
 
 USE_I18N = True
 
@@ -122,7 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]

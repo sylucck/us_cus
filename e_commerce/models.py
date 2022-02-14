@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from ckeditor.fields import RichTextField
+
 
 
 from django.utils.text import slugify
@@ -162,5 +162,5 @@ class ShippingAddress(models.Model):
 
 
 class About(models.Model):
-    text = RichTextField(null=True, blank=True)
+    text = models.TextField(null=True, blank=True)
 

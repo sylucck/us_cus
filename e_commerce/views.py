@@ -174,7 +174,7 @@ def updateItem(request):
     product = Product.objects.get(id=productId)
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
 
-    #if order already exist, we want to change the quantity-add or substract not getiing a new one
+    #if order already exist, we want to change the quantity-add or substract not getting a new one
     orderItem, created  = OrderItem.objects.get_or_create(order=order, product=product)
 
     if action =='add':
