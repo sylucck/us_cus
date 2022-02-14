@@ -155,6 +155,12 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'store'
 
 LOGIN_URL = 'login'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME':env('CLOUD_NAME'),
+    'API_KEY': env('API_KEY'),
+    'API_SECRET':env('API_SECRET'),
+}
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
