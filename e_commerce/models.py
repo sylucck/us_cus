@@ -16,7 +16,7 @@ def rand_slug():
 class Customer(models.Model):
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=40, null=True, blank=True, help_text="Insert your name")
-    image = models.ImageField(default='default.png', upload_to='profile_pics', null=True, blank=True)
+    image = models.ImageField(default='default_g5kghd.jpg', upload_to='profile_pics', null=True, blank=True)
     phone = models.CharField(max_length=11, null=True, blank=True)
     address = models.CharField(max_length=20, null=True, blank=True)
     email = models.CharField(max_length=200, null=True, blank=True)
