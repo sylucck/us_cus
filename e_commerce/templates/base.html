@@ -10,7 +10,7 @@
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
            <title>Ecommerce</title>
-           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1"/>
+           <meta name="viewport" content="width=device-width, initial-scale=0, maximum-scale=-1, minimum-scale=1"/>
 
            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -77,6 +77,11 @@
        <br><input type="text" name="q" value="{{request.GET.q}}" placeholder="Search products"/>
       <input type="submit" name="submit" value="Search"/>
       </form>
+    <br>
+    <hr>
+    
+    <a href="{% url 'cart' %}"><img id="cart-icon" src="{% static 'media/cart.png' %}"></a>
+        <h5><p id="cart-total">{{cartItems}}</p></h5>
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -127,8 +132,7 @@
 
       
         
-        <a href="{% url 'cart' %}"><img id="cart-icon" src="{% static 'media/cart.png' %}"></a>
-        <h5><p id="cart-total">{{cartItems}}</p></h5>
+        
          
       
       
