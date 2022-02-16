@@ -1,4 +1,4 @@
-This is a basic ecommerce app built with Python-Django, HTML, Bootstrap, and Javascript for Cookies generation.
+This is a basic ecommerce app built with Django, HTML, Bootstrap, and Javascript for Cookies generation.
 
  Website Funtionalities:
 

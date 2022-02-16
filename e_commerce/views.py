@@ -251,3 +251,8 @@ def searchposts(request):
 
     else:
         return render(request, 'search.html')
+
+
+def about(request):
+    abouts = About.objects.all()
+    return render(request, 'e_commerce/about.html', {'abouts': abouts})
