@@ -220,17 +220,15 @@ def processOrder(request):
                 city =data['shipping']['city'],
                 state = data['shipping']['state'],
                 zipcode =data['shipping']['zipcode'],
-            )
-        
-
-    
-    
+        )
     
 
     return JsonResponse("Payment complete", safe=False)
 
 
 def searchposts(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
     if request.method == 'GET':
         query= request.GET.get('q')
 
@@ -242,17 +240,20 @@ def searchposts(request):
             results= Product.objects.filter(search).distinct()
 
             context={'results': results,
-                     'submitbutton': submitbutton}
+                     'submitbutton': submitbutton,
+                     'cartItems':cartItems }
 
             return render(request, 'search.html', context)
 
         else:
-            return render(request, 'search.html')
+            return render(request, 'search.html', {'cartItems':cartItems})
 
     else:
-        return render(request, 'search.html')
+        return render(request, 'search.html', {'cartItems':cartItems})
 
 
 def about(request):
     abouts = About.objects.all()
-    return render(request, 'e_commerce/about.html', {'abouts': abouts})
+    data = cartData(request)
+    cartItems = data['cartItems']
+    return render(request, 'e_commerce/about.html', {'abouts': abouts, 'cartItems':cartItems})
